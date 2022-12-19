@@ -78,15 +78,11 @@
     			<div class="col-md-12	featured-top">
     				<div class="row no-gutters">
 	  					<div class="col-md-4 d-flex align-items-center">
-	  						<form action="#" class="request-form ftco-animate bg-primary">
+	  						<form onsubmit="sendEmail(); reset(); return false;" class="request-form ftco-animate bg-primary">
 		          		<h2>Make your trip</h2>
 			    				<div class="form-group">
 			    					<label for="" class="label">Pick-up location</label>
-			    					<input type="text" class="form-control" placeholder="City, Airport, Station, etc">
-			    				</div>
-			    				<div class="form-group">
-			    					<label for="" class="label">Drop-off location</label>
-			    					<input type="text" class="form-control" placeholder="City, Airport, Station, etc">
+			    					<input type="text" class="form-control" id="pickup" placeholder="City, Airport, Station, etc">
 			    				</div>
 			    				<div class="d-flex">
 			    					<div class="form-group mr-2">
@@ -102,6 +98,16 @@
 		                <label for="" class="label">Pick-up time</label>
 		                <input type="text" class="form-control" id="time_pick" placeholder="Time">
 		              </div>
+								<div class="d-flex">
+									<div class="form-group mr-2">
+							<label for="" class="label">Name</label>
+							<input type="text" class="form-control" id="name" placeholder="Name">
+						</div>
+						<div class="form-group ml-2">
+							<label for="" class="label">Phone Number</label>
+							<input type="text" class="form-control" id="phone" placeholder="Phone Number">
+						</div>
+					</div>
 			            <div class="form-group">
 			              <input type="submit" value="Rent A Car Now" class="btn btn-secondary py-3 px-4">
 			            </div>
@@ -437,6 +443,25 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="js/google-map.js"></script>
   <script src="js/main.js"></script>
-    
+  <script src="https://smtpjs.com/v3/smtp.js"></script>
+  <script>
+    function sendEmail(){
+        Email.send({
+          SecureToken : "98e2070c-ce11-4db9-9337-6b241b10a6bd",
+          To : 'fego.swampoilwell@gmail.com',
+          From : "f.ogbegwa@gmail.com",
+          Subject : "New Booking Form Entry",
+          Body : "Pick-Up Location: " + document.getElementById("pickup").value
+              + "<br> Pick-up Date: " + document.getElementById("book_pick_date").value
+              + "<br> Drop-off Date: " + document.getElementById("book_off_date").value
+			  + "<br> Pick-up Time: " + document.getElementById("time_pick").value
+              + "<br> Client Name: " + document.getElementById("name").value
+			  + "<br> Client Number: " + document.getElementById("phone").value
+
+        }).then(
+          message => alert("Sent Succesfully")
+        );
+    }
+  </script>
   </body>
 </html>
