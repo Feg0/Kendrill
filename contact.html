@@ -95,7 +95,7 @@
 		        </div>
           </div>
           <div class="col-md-8 block-9 mb-md-5">
-            <form action="contact.php" class="bg-light p-5 contact-form" method="post">
+            <form onsubmit="sendEmail(); reset(); return false;" class="bg-light p-5 contact-form">
               <div class="form-group">
                 <input type="text" class="form-control" id = "name" placeholder="Your Name">
               </div>
@@ -103,7 +103,7 @@
                 <input type="text" class="form-control" id="email" placeholder="Your Email">
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" id="subject" placeholder="Subject">
+                <input type="text" class="form-control" id="phone" placeholder="Phone Number">
               </div>
               <div class="form-group">
                 <textarea name="Message" id="message" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
@@ -209,6 +209,22 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="js/google-map.js"></script>
   <script src="js/main.js"></script>
-    
+  <script src="https://smtpjs.com/v3/smtp.js"></script>
+  <script>
+    function sendEmail(){
+        Email.send({
+          SecureToken : "98e2070c-ce11-4db9-9337-6b241b10a6bd",
+          To : 'fego.swampoilwell@gmail.com',
+          From : "f.ogbegwa@gmail.com",
+          Subject : "New Contact Form Enquiry",
+          Body : "Name: " + document.getElementById("name").value
+              + "<br> Email: " + document.getElementById("email").value
+              + "<br> Phone Number: " + document.getElementById("phone").value
+              + "<br> Message: " + document.getElementById("message").value
+        }).then(
+          message => alert("Sent Succesfully")
+        );
+    }
+  </script>
   </body>
 </html>
